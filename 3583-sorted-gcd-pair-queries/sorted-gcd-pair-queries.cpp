@@ -1,26 +1,33 @@
 class Solution {
-    using ll = long long;
 public:
-    vector<int> gcdValues(vector<int>& A, vector<long long>& queries) {
-        int mx = ranges::max(A);
-        vector<int> freq(mx + 1, 0);
-        vector<ll> GCD(mx + 1, 0);
-        
-        for (auto& a : A) freq[a]++;
-        
-        for (int i = mx; i > 0; i--) {
-            ll sm = 0, extra = 0;
-            for (int j = i; j <= mx; j += i)
-                sm += freq[j], extra += GCD[j];
-            GCD[i] = sm * (sm - 1) / 2 - extra;
+    vector<int> gcdValues(vector<int>& nums, vector<long long>& queries) {
+        int m = *max_element(nums.begin(), nums.end());
+        vector<long long> cnt(m + 1);
+        for (int num : nums) {
+            cnt[num]++;
         }
-        
-        partial_sum(GCD.begin(), GCD.end(), GCD.begin());
-        
-        vector<int> res(queries.size());
-        for (int i = 0; i < queries.size(); i++)
-            res[i] = ranges::upper_bound(GCD, queries[i]) - GCD.begin();
-            
-        return res;
+        for (int i = 1; i <= m; i++) {
+            for (int j = i * 2; j <= m; j += i) {
+                cnt[i] += cnt[j];
+            }
+        }
+        for (int i = 1; i <= m; i++) {
+            cnt[i] = cnt[i] * (cnt[i] - 1) / 2;
+        }
+        for (int i = m; i >= 1; i--) {
+            for (int j = i * 2; j <= m; j += i) {
+                cnt[i] -= cnt[j];
+            }
+        }
+        for (int i = 1; i <= m; i++) {
+            cnt[i] += cnt[i - 1];
+        }
+        vector<int> ans;
+        for (long long q : queries) {
+            q++;
+            int pos = lower_bound(cnt.begin(), cnt.end(), q) - cnt.begin();
+            ans.push_back(pos);
+        }
+        return ans;
     }
 };
