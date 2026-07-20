@@ -8,8 +8,8 @@ public:
         while(left<right)
         {
             if(numbers[left]+numbers[right]>target) right--;
-            if(numbers[left]+numbers[right]<target) left++;
-            if(numbers[left]+numbers[right]==target)
+            else if(numbers[left]+numbers[right]<target) left++;
+            else
             {
                 ans.push_back(left+1);
                 ans.push_back(right+1);
