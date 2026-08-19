@@ -19,20 +19,15 @@ public:
 
             for (int s : it.second) {
 
-                if (s >= 2 && s <= 5)
-                    l = false;
+                if (s>=2&& s<=5) l = false;
 
-                if (s >= 4 && s <= 7)
-                    m = false;
+                if (s>=4 &&s<=7) m = false;
 
-                if (s >= 6 && s <= 9)
-                    r = false;
+                if (s>=6 && s<= 9) r = false;
             }
 
-            if (l && r)
-                ans += 2;
-            else if (l || m || r)
-                ans += 1;
+            if (l && r) ans += 2;
+            else if (l || m || r) ans += 1;
         }
 
         return ans;
