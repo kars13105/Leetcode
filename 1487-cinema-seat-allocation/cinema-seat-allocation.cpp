@@ -1,11 +1,10 @@
 class Solution {
 public:
-    int maxNumberOfFamilies(int n, vector<vector<int>>& reservedss) {
-        
-        
+    int maxNumberOfFamilies(int n, vector<vector<int>>& yoyo) {
+                
         map<int, vector<int>> mp;
 
-        for (auto &v : reservedss) 
+        for (auto &v : yoyo) 
         {
             mp[v[0]].push_back(v[1]);
         }
