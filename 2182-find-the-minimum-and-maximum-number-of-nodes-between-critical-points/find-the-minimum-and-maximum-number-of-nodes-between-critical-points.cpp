@@ -30,9 +30,11 @@ public:
         }
         int n = c.size();
         int mini = INT_MAX;
+        int maxi = INT_MIN;
         for(int i =0;i<n-1;i++)
         {
             mini = min(mini, c[i+1]-c[i]);
+            
         }
         if(n < 2)
             return {-1, -1};
